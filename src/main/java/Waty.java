@@ -1,14 +1,13 @@
 import java.util.Scanner;
 public class Waty {
-    public static void main(String[] args) {
+    private static String horizontalLineFormatter(String content) {
         String horizontalLine = "____________________________________________________________\n";
-        String greet = horizontalLine +
-                " Hello! I'm Waty\n" +
-                " What can I do for you?\n" +
-                horizontalLine;
-        String bye = horizontalLine +
-                " Bye. Hope to see you again soon!\n" +
-                horizontalLine;
+        return horizontalLine + content + horizontalLine;
+    }
+    public static void main(String[] args) {
+        String greet = horizontalLineFormatter(" Hello! I'm Waty\n" +
+                " What can I do for you?\n");
+        String bye = horizontalLineFormatter(" Bye. Hope to see you again soon!\n");
         System.out.println(greet);
         Scanner reader = new Scanner(System.in);
         while (true) {
@@ -17,7 +16,8 @@ public class Waty {
                 System.out.println(bye);
                 break;
             }
-            System.out.println(horizontalLine + userInput + horizontalLine);
+            System.out.println(horizontalLineFormatter(userInput));
         }
     }
+
 }
