@@ -1,5 +1,8 @@
 import java.util.ArrayList;
+import java.util.MissingFormatArgumentException;
 import java.util.Scanner;
+import exceptions.InvalidArgumentException;
+import exceptions.InvalidCommandException;
 public class Waty {
     private static ArrayList<Task> tasks = new ArrayList<>();
 
@@ -10,6 +13,10 @@ public class Waty {
     private static String horizontalLineFormatter(String content) {
         String horizontalLine = "____________________________________________________________\n";
         return horizontalLine + content + horizontalLine;
+    }
+
+    private static String bye() {
+        return " Bye. Hope to see you again soon!\n";
     }
 
     private static String listTasks() {
@@ -51,6 +58,64 @@ public class Waty {
         return " Got it. I've added this task:\n" + " " + newEvent.toString() + " Now you have " +
                 String.valueOf(tasks.size()) + " tasks in the list.\n";
     }
+
+    private static void handleCommand(String[] split) throws InvalidArgumentException, InvalidCommandException {
+        try {
+            Command command = Command.valueOf(split[0].toUpperCase());
+            switch (command) {
+                case BYE:
+                    System.out.println(horizontalLineFormatter(bye()));
+                    return;
+                case LIST:
+                    String list = horizontalLineFormatter(listTasks());
+                    System.out.println(list);
+                    break;
+                case MARK:
+                    if (split.length < 2) {
+                        throw new InvalidArgumentException("Example usage: mark 1\n");
+                    }
+                    int markIndex = Integer.parseInt(split[1].strip()) - 1;
+                    String markStatus = markTask(markIndex);
+                    System.out.println(horizontalLineFormatter(markStatus));
+                    break;
+                case UNMARK:
+                    if (split.length < 2) {
+                        throw new InvalidArgumentException("Example usage: unmark 1\n");
+                    }
+                    int unmarkIndex = Integer.parseInt(split[1].strip()) - 1;
+                    String unmarkStatus = unmarkTask(unmarkIndex);
+                    System.out.println(horizontalLineFormatter(unmarkStatus));
+                    break;
+                case TODO:
+                    if (split.length < 2 || split[1].trim().isEmpty()) {
+                        throw new InvalidArgumentException("The description of a todo cannot be empty.\n");
+                    }
+                    String taskDescription = split[1];
+                    String taskStatus = addToDo(taskDescription);
+                    System.out.println(horizontalLineFormatter(taskStatus));
+                    break;
+                case DEADLINE:
+                    if (split.length < 2 || !split[1].contains("/by"))
+                        throw new InvalidArgumentException(
+                                "The deadline task must include a description and a '/by' argument.\n");
+                    String[] deadlineSplit = split[1].split(" /by", 2);
+                    String deadlineStatus = addDeadline(deadlineSplit[0], deadlineSplit[1]);
+                    System.out.println(horizontalLineFormatter(deadlineStatus));
+                    break;
+                case EVENT:
+                    if (split.length < 2 || !split[1].contains("/from") || !split[1].contains("/to"))
+                        throw new InvalidArgumentException(
+                                "The event task must include a description, a '/from' argument, and a '/to' argument.\n");
+                    String[] eventSplit = split[1].split(" /from ", 2);
+                    String[] timeSplit = eventSplit[1].split(" /to", 2);
+                    String eventStatus = addEvent(eventSplit[0], timeSplit[0], timeSplit[1]);
+                    System.out.println(horizontalLineFormatter(eventStatus));
+                    break;
+            }
+        } catch (IllegalArgumentException e) {
+            throw new InvalidCommandException("OOPS!!! What do you mean???\n");
+        }
+    }
     public static void main(String[] args) {
         String greet = horizontalLineFormatter(" Hello! I'm Waty\n" +
                 " What can I do for you?\n");
@@ -62,46 +127,11 @@ public class Waty {
             String userInput = reader.nextLine() + "\n";
             String[] split = userInput.split("\\s+", 2);
             try {
-                Command command = Command.valueOf(split[0].toUpperCase());
-
-                switch (command) {
-                    case BYE:
-                        System.out.println(bye);
-                        return;
-                    case LIST:
-                        String list = horizontalLineFormatter(listTasks());
-                        System.out.println(list);
-                        break;
-                    case MARK:
-                        int markIndex = Integer.parseInt(split[1].strip()) - 1;
-                        String markStatus = markTask(markIndex);
-                        System.out.println(horizontalLineFormatter(markStatus));
-                        break;
-                    case UNMARK:
-                        int unmarkIndex = Integer.parseInt(split[1].strip()) - 1;
-                        String unmarkStatus = unmarkTask(unmarkIndex);
-                        System.out.println(horizontalLineFormatter(unmarkStatus));
-                        break;
-                    case TODO:
-                        String taskDescription = split[1];
-                        String taskStatus = addToDo(taskDescription);
-                        System.out.println(horizontalLineFormatter(taskStatus));
-                        break;
-                    case DEADLINE:
-                        String[] deadlineSplit = split[1].split(" /by", 2);
-                        String deadlineStatus = addDeadline(deadlineSplit[0], deadlineSplit[1]);
-                        System.out.println(horizontalLineFormatter(deadlineStatus));
-                        break;
-                    case EVENT:
-                        String[] eventSplit = split[1].split(" /from ", 2);
-                        String[] timeSplit = eventSplit[1].split(" /to", 2);
-                        String eventStatus = addEvent(eventSplit[0], timeSplit[0], timeSplit[1]);
-                        System.out.println(horizontalLineFormatter(eventStatus));
-                        break;
-
-                }
-            } catch (IllegalArgumentException e) {
-                System.out.println("WHAT THE WATY!!!");
+                handleCommand(split);
+            } catch (InvalidArgumentException | InvalidCommandException e) {
+                System.out.println(horizontalLineFormatter(e.getMessage()));
+            } catch (Exception e) {
+                System.out.println("ERRORRRRR!!! THIS IS WEIRD");
             }
 
         }
