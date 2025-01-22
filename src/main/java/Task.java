@@ -1,4 +1,4 @@
-public class Task {
+abstract class Task {
     private Boolean status;
     private final String description;
 
