@@ -5,11 +5,11 @@ public class Event extends Task{
     Event(String description, String from, String to) {
         super(description);
         this.from = from;
-        this.to = to;
+        this.to = to.strip();
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + this.from + " to: " + this.to + ")";
+        return "[E]" + super.toString() + " (from: " + this.from + " to: " + this.to + ")\n";
     }
 }

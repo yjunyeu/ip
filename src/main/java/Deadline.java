@@ -3,10 +3,10 @@ public class Deadline extends Task{
 
     Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        this.by = by.strip();
     }
 
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by + ")";
+        return "[D]" + super.toString() + " (by: " + this.by + ")\n";
     }
 }
