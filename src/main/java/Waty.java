@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.MissingFormatArgumentException;
 import java.util.Scanner;
 import exceptions.InvalidArgumentException;
 import exceptions.InvalidCommandException;
@@ -7,7 +6,7 @@ public class Waty {
     private static ArrayList<Task> tasks = new ArrayList<>();
 
     private enum Command {
-        LIST, BYE, MARK, UNMARK, TODO, DEADLINE, EVENT;
+        LIST, BYE, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE;
 
     }
     private static String horizontalLineFormatter(String content) {
@@ -56,6 +55,13 @@ public class Waty {
         Event newEvent = new Event(taskDescription, from, to);
         tasks.add(newEvent);
         return " Got it. I've added this task:\n" + " " + newEvent.toString() + " Now you have " +
+                String.valueOf(tasks.size()) + " tasks in the list.\n";
+    }
+
+    private static String deleteTask(int index) {
+        String deleteTaskDescription = tasks.get(index).toString();
+        tasks.remove(index);
+        return " Noted. I've removed this task:\n" + " " + deleteTaskDescription + " Now you have " +
                 String.valueOf(tasks.size()) + " tasks in the list.\n";
     }
 
@@ -111,15 +117,24 @@ public class Waty {
                     String eventStatus = addEvent(eventSplit[0], timeSplit[0], timeSplit[1]);
                     System.out.println(horizontalLineFormatter(eventStatus));
                     break;
+                case DELETE:
+                    if (split.length < 2) {
+                        throw new InvalidArgumentException("Example usage: delete 1\n");
+                    }
+                    int deleteIndex = Integer.parseInt(split[1].strip()) - 1;
+                    String deleteStatus = deleteTask(deleteIndex);
+                    System.out.println(horizontalLineFormatter(deleteStatus));
+                    break;
             }
         } catch (IllegalArgumentException e) {
             throw new InvalidCommandException("OOPS!!! What do you mean???\n");
         }
     }
     public static void main(String[] args) {
-        String greet = horizontalLineFormatter(" Hello! I'm Waty\n" +
-                " What can I do for you?\n");
-        String bye = horizontalLineFormatter(" Bye. Hope to see you again soon!\n");
+        String greet = horizontalLineFormatter("""
+                 Hello! I'm Waty
+                 What can I do for you?
+                """);
         System.out.println(greet);
         Scanner reader = new Scanner(System.in);
 
