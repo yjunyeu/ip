@@ -19,6 +19,10 @@ abstract class Task {
         return (this.status ? "1 | " : "0 | ") + this.description;
     }
 
+    public static Task loadTask(String[] args) throws IllegalArgumentException {
+        throw new UnsupportedOperationException("Cannot load a abstract Task");
+    }
+
     @Override
     public String toString() {
         if (this.status) {

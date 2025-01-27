@@ -17,4 +17,11 @@ public class Event extends Task{
     public String getSaveData() {
         return "E | " + super.getSaveData() + " | " + this.from + "-" + this.to;
     }
+    public static Event loadTask(String[] args) {
+        Event event  = new Event(args[2], args[3], args[4]);
+        if (args[1].equals("1")) {
+            event.mark();
+        }
+        return event;
+    }
 }
