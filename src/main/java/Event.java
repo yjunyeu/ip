@@ -1,21 +1,25 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 public class Event extends Task{
-    private final String from;
-    private final String to;
+    private final LocalDateTime from;
+    private final LocalDateTime to;
 
     Event(String description, String from, String to) {
         super(description);
-        this.from = from;
-        this.to = to.strip();
+        this.from = LocalDateTime.parse(from, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+        this.to = LocalDateTime.parse(to, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + this.from + " to: " + this.to + ")";
+        return "[E]" + super.toString() + " (from: " + this.from.format(DateTimeFormatter.ofPattern("dd MMM yyyy HHmm"))
+                + " to: " + this.to.format(DateTimeFormatter.ofPattern("dd MMM yyyy HHmm")) + ")";
     }
 
     @Override
     public String getSaveData() {
-        return "E | " + super.getSaveData() + " | " + this.from + "-" + this.to;
+        return "E | " + super.getSaveData() + " | " + this.from.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"))
+                + "-" + this.to.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
     }
     public static Event loadTask(String[] args) {
         String[] period = args[3].split("-");

@@ -76,13 +76,8 @@ public class Waty {
             Scanner storageReader = new Scanner(STORAGE_FILE.toFile());
             while (storageReader.hasNextLine()) {
                 String data = storageReader.nextLine();
-                System.out.println(data);
                 String[] args = data.split(" \\| ");
-                String type = args[0].trim();
-                System.out.println(type);
-                for (int i = 0; i < type.length(); i++) {
-                    System.out.println("Char: " + type.charAt(i) + " ASCII: " + (int) type.charAt(i));
-                }
+                String type = args[0].trim();;
                 if (type.equals("T")) {
                     tasks.add(ToDo.loadTask(args));
                 } else if (type.equals("D")) {
