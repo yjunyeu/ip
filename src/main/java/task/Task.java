@@ -1,4 +1,6 @@
-abstract class Task {
+package task;
+
+public abstract class Task {
     private boolean status;
     private final String description;
 
@@ -20,7 +22,7 @@ abstract class Task {
     }
 
     public static Task loadTask(String[] args) throws IllegalArgumentException {
-        throw new UnsupportedOperationException("Cannot load a abstract Task");
+        throw new UnsupportedOperationException("Cannot load a abstract task.Task");
     }
 
     @Override

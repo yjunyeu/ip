@@ -1,9 +1,11 @@
+package task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-public class Deadline extends Task{
+public class Deadline extends Task {
     private final LocalDateTime by;
 
-    Deadline(String description, String by) {
+    public Deadline(String description, String by) {
         super(description);
         this.by = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
     }
