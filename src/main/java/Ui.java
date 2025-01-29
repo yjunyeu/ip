@@ -23,6 +23,10 @@ public class Ui {
         displayMessage(" Bye. Hope to see you again soon!\n");
     }
 
+    public void displayError(String message) {
+        displayMessage("Error: " + message);
+    }
+
     public String readCommand() {
         return scanner.nextLine() + "\n";
     }

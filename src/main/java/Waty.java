@@ -8,18 +8,18 @@ import java.io.IOException;
 import exceptions.InvalidArgumentException;
 import exceptions.InvalidCommandException;
 public class Waty {
-    private static ArrayList<Task> tasks = new ArrayList<>();
-    private static final Path STORAGE_DIR = Paths.get(System.getProperty("user.dir"),  "data");
-    private static final Path STORAGE_FILE = STORAGE_DIR.resolve("waty.txt");
+    private ArrayList<Task> tasks;
 
     private enum Command {
         LIST, BYE, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE;
 
     }
     private Ui ui;
+    private Storage storage;
 
     public Waty() {
         this.ui = new Ui();
+        this.storage = new Storage(ui);
     }
 
     private String listTasks() {
@@ -39,57 +39,6 @@ public class Waty {
     private String unmarkTask(int index) {
         tasks.get(index).unmark();
         return " OK, I've marked this task as not done yet:\n " + tasks.get(index);
-    }
-
-    private void setupStorage() {
-        try {
-            if (!Files.exists(STORAGE_DIR)) {
-                Files.createDirectories(STORAGE_DIR);
-            }
-            if (!Files.exists(STORAGE_FILE)) {
-                Files.createFile(STORAGE_FILE);
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred while setting up storage: " + e.getMessage());
-        }
-    }
-
-    private void saveTasks() {
-        try {
-            FileWriter storageWriter = new FileWriter(STORAGE_FILE.toFile());
-            for (Task task: tasks) {
-                storageWriter.write(task.getSaveData() + "\n");
-            }
-            storageWriter.close();
-        } catch (IOException e) {
-            System.out.println("An error occurred when saving tasks");
-            e.printStackTrace();
-        }
-    }
-
-    private void loadTasks() {
-        setupStorage();
-        try {
-            Scanner storageReader = new Scanner(STORAGE_FILE.toFile());
-            while (storageReader.hasNextLine()) {
-                String data = storageReader.nextLine();
-                String[] args = data.split(" \\| ");
-                String type = args[0].trim();;
-                if (type.equals("T")) {
-                    tasks.add(ToDo.loadTask(args));
-                } else if (type.equals("D")) {
-                    tasks.add(Deadline.loadTask(args));
-                } else if (type.equals("E")) {
-                    tasks.add(Event.loadTask(args));
-                }
-            }
-            storageReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("No saved task found. Welcome!");
-        } catch (Exception e) {
-            System.out.println("Error occurred when loading tasks");
-            e.printStackTrace();
-        }
     }
 
     private String addToDo(String taskDescription) {
@@ -125,7 +74,7 @@ public class Waty {
             Command command = Command.valueOf(split[0].toUpperCase());
             switch (command) {
                 case BYE:
-                    saveTasks();
+                    storage.saveTasks(tasks);
                     ui.displayBye();
                     return false;
                 case LIST:
@@ -188,7 +137,7 @@ public class Waty {
     }
 
     public void run() {
-        loadTasks();
+        tasks = storage.loadTasks();
         ui.displayWelcome();
         boolean running = true;
         while (running) {
