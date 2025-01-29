@@ -1,3 +1,9 @@
+package storage;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.ToDo;
+import ui.Ui;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.*;
@@ -9,9 +15,11 @@ public class Storage {
     private final Path STORAGE_FILE = STORAGE_DIR.resolve("waty.txt");
 
     private final Ui ui;
+    private final ArrayList<Task> tasks;
 
     public Storage(Ui ui) {
         this.ui = ui;
+        tasks = new ArrayList<>();
     }
 
     private void setupStorage() {
@@ -27,7 +35,7 @@ public class Storage {
         }
     }
 
-    public void saveTasks(ArrayList<Task> tasks) {
+    public void saveTasks() {
         try {
             FileWriter storageWriter = new FileWriter(STORAGE_FILE.toFile());
             for (Task task: tasks) {
@@ -41,7 +49,6 @@ public class Storage {
 
     public ArrayList<Task> loadTasks() {
         setupStorage();
-        ArrayList<Task> tasks = new ArrayList<>();
         try {
             Scanner storageReader = new Scanner(STORAGE_FILE.toFile());
             while (storageReader.hasNextLine()) {
