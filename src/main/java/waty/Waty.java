@@ -1,3 +1,5 @@
+package waty;
+
 import exceptions.InvalidArgumentException;
 import exceptions.InvalidCommandException;
 import parser.Parser;
