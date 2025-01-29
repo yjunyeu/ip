@@ -16,16 +16,13 @@ public class Waty {
         LIST, BYE, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE;
 
     }
-    private static String horizontalLineFormatter(String content) {
-        String horizontalLine = "____________________________________________________________\n";
-        return horizontalLine + content + horizontalLine;
+    private Ui ui;
+
+    public Waty() {
+        this.ui = new Ui();
     }
 
-    private static String bye() {
-        return " Bye. Hope to see you again soon!\n";
-    }
-
-    private static String listTasks() {
+    private String listTasks() {
         StringBuilder listOfTasks = new StringBuilder(" Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
             String numberedTask = " " + String.valueOf(i + 1) + ". " + tasks.get(i) + "\n";
@@ -34,17 +31,17 @@ public class Waty {
         return listOfTasks.toString();
     }
 
-    private static String markTask(int index) {
+    private String markTask(int index) {
         tasks.get(index).mark();
         return " Nice! I've marked this task as done:\n " + tasks.get(index);
     }
 
-    private static String unmarkTask(int index) {
+    private String unmarkTask(int index) {
         tasks.get(index).unmark();
         return " OK, I've marked this task as not done yet:\n " + tasks.get(index);
     }
 
-    private static void setupStorage() {
+    private void setupStorage() {
         try {
             if (!Files.exists(STORAGE_DIR)) {
                 Files.createDirectories(STORAGE_DIR);
@@ -57,7 +54,7 @@ public class Waty {
         }
     }
 
-    private static void saveTasks() {
+    private void saveTasks() {
         try {
             FileWriter storageWriter = new FileWriter(STORAGE_FILE.toFile());
             for (Task task: tasks) {
@@ -70,7 +67,7 @@ public class Waty {
         }
     }
 
-    private static void loadTasks() {
+    private void loadTasks() {
         setupStorage();
         try {
             Scanner storageReader = new Scanner(STORAGE_FILE.toFile());
@@ -95,45 +92,44 @@ public class Waty {
         }
     }
 
-    private static String addToDo(String taskDescription) {
+    private String addToDo(String taskDescription) {
         ToDo newToDo = new ToDo(taskDescription);
         tasks.add(newToDo);
         return " Got it. I've added this task:\n" + " " + newToDo.toString() + "\n" + " Now you have " +
                 String.valueOf(tasks.size()) + " tasks in the list.\n";
     }
 
-    private static String addDeadline(String taskDescription, String by) {
+    private String addDeadline(String taskDescription, String by) {
         Deadline newDeadline = new Deadline(taskDescription, by);
         tasks.add(newDeadline);
         return " Got it. I've added this task:\n" + " " + newDeadline.toString() + "\n" + " Now you have " +
                 String.valueOf(tasks.size()) + " tasks in the list.\n";
     }
 
-    private static String addEvent(String taskDescription, String from, String to) {
+    private String addEvent(String taskDescription, String from, String to) {
         Event newEvent = new Event(taskDescription, from, to);
         tasks.add(newEvent);
         return " Got it. I've added this task:\n" + " " + newEvent.toString() + "\n" + " Now you have " +
                 String.valueOf(tasks.size()) + " tasks in the list.\n";
     }
 
-    private static String deleteTask(int index) {
+    private String deleteTask(int index) {
         String deleteTaskDescription = tasks.get(index).toString();
         tasks.remove(index);
         return " Noted. I've removed this task:\n" + " " + deleteTaskDescription + "\n" + " Now you have " +
                 String.valueOf(tasks.size()) + " tasks in the list.\n";
     }
 
-    private static boolean handleCommand(String[] split) throws InvalidArgumentException, InvalidCommandException {
+    private boolean handleCommand(String[] split) throws InvalidArgumentException, InvalidCommandException {
         try {
             Command command = Command.valueOf(split[0].toUpperCase());
             switch (command) {
                 case BYE:
                     saveTasks();
-                    System.out.println(horizontalLineFormatter(bye()));
+                    ui.displayBye();
                     return false;
                 case LIST:
-                    String list = horizontalLineFormatter(listTasks());
-                    System.out.println(list);
+                    ui.displayMessage(listTasks());
                     break;
                 case MARK:
                     if (split.length < 2) {
@@ -141,7 +137,7 @@ public class Waty {
                     }
                     int markIndex = Integer.parseInt(split[1].strip()) - 1;
                     String markStatus = markTask(markIndex) + "\n";
-                    System.out.println(horizontalLineFormatter(markStatus));
+                    ui.displayMessage(markStatus);
                     break;
                 case UNMARK:
                     if (split.length < 2) {
@@ -149,7 +145,7 @@ public class Waty {
                     }
                     int unmarkIndex = Integer.parseInt(split[1].strip()) - 1;
                     String unmarkStatus = unmarkTask(unmarkIndex) + "\n";
-                    System.out.println(horizontalLineFormatter(unmarkStatus));
+                    ui.displayMessage(unmarkStatus);
                     break;
                 case TODO:
                     if (split.length < 2 || split[1].trim().isEmpty()) {
@@ -157,7 +153,7 @@ public class Waty {
                     }
                     String taskDescription = split[1].strip();
                     String taskStatus = addToDo(taskDescription);
-                    System.out.println(horizontalLineFormatter(taskStatus));
+                    ui.displayMessage(taskStatus);
                     break;
                 case DEADLINE:
                     if (split.length < 2 || !split[1].contains("/by"))
@@ -165,7 +161,7 @@ public class Waty {
                                 "The deadline task must include a description and a '/by' argument.\n");
                     String[] deadlineSplit = split[1].split(" /by", 2);
                     String deadlineStatus = addDeadline(deadlineSplit[0].strip(), deadlineSplit[1].strip());
-                    System.out.println(horizontalLineFormatter(deadlineStatus));
+                    ui.displayMessage(deadlineStatus);
                     break;
                 case EVENT:
                     if (split.length < 2 || !split[1].contains("/from") || !split[1].contains("/to"))
@@ -174,7 +170,7 @@ public class Waty {
                     String[] eventSplit = split[1].split(" /from ", 2);
                     String[] timeSplit = eventSplit[1].split(" /to", 2);
                     String eventStatus = addEvent(eventSplit[0].strip(), timeSplit[0].strip(), timeSplit[1].strip());
-                    System.out.println(horizontalLineFormatter(eventStatus));
+                    ui.displayMessage(eventStatus);
                     break;
                 case DELETE:
                     if (split.length < 2) {
@@ -182,7 +178,7 @@ public class Waty {
                     }
                     int deleteIndex = Integer.parseInt(split[1].strip()) - 1;
                     String deleteStatus = deleteTask(deleteIndex);
-                    System.out.println(horizontalLineFormatter(deleteStatus));
+                    ui.displayMessage(deleteStatus);
                     break;
             }
         } catch (IllegalArgumentException e) {
@@ -190,28 +186,26 @@ public class Waty {
         }
         return true;
     }
-    public static void main(String[] args) {
-        loadTasks();
-        String greet = horizontalLineFormatter("""
-                 Hello! I'm Waty
-                 What can I do for you?
-                """);
-        System.out.println(greet);
-        Scanner reader = new Scanner(System.in);
-        boolean running = true;
 
+    public void run() {
+        loadTasks();
+        ui.displayWelcome();
+        boolean running = true;
         while (running) {
-            String userInput = reader.nextLine() + "\n";
+            String userInput = ui.readCommand();
             String[] split = userInput.split("\\s+", 2);
             try {
                 running = handleCommand(split);
             } catch (InvalidArgumentException | InvalidCommandException e) {
-                System.out.println(horizontalLineFormatter(e.getMessage()));
+                ui.displayMessage(e.getMessage());
             } catch (Exception e) {
                 System.out.println("ERRORRRRR!!! THIS IS WEIRD");
             }
 
         }
+    }
+    public static void main(String[] args) {
+        new Waty().run();
     }
 
 }
