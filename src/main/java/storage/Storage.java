@@ -10,6 +10,10 @@ import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileWriter;
+
+/**
+ * Handles the storage and retrieval of tasks from a text file.
+ */
 public class Storage {
     private final Path STORAGE_DIR = Paths.get(System.getProperty("user.dir"),  "data");
     private final Path STORAGE_FILE = STORAGE_DIR.resolve("waty.txt");
@@ -17,11 +21,19 @@ public class Storage {
     private final Ui ui;
     private final ArrayList<Task> tasks;
 
+    /**
+     * Constructs a Storage instance.
+     *
+     * @param ui The user interface instance to display messages.
+     */
     public Storage(Ui ui) {
         this.ui = ui;
         tasks = new ArrayList<>();
     }
 
+    /**
+     * Sets up the storage directory and file if they do not exist.
+     */
     private void setupStorage() {
         try {
             if (!Files.exists(STORAGE_DIR)) {
@@ -35,6 +47,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the current list of tasks to the storage file.
+     */
     public void saveTasks() {
         try {
             FileWriter storageWriter = new FileWriter(STORAGE_FILE.toFile());
@@ -47,6 +62,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks from the storage file.
+     *
+     * @return A list of tasks retrieved from storage.
+     */
     public ArrayList<Task> loadTasks() {
         setupStorage();
         try {

@@ -5,12 +5,33 @@ import exceptions.InvalidCommandException;
 import task.ToDo;
 import task.Deadline;
 import task.Event;
+
+/**
+ * Parses user input and translates it into executable commands.
+ */
 public class Parser {
+
+    /**
+     * Enumeration of command keywords.
+     */
     private enum Key {
         LIST, BYE, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE;
 
     }
+
+    /**
+     * Constructs a Parser instance.
+     */
     public Parser() {}
+
+    /**
+     * Parses the user input and returns the corresponding command.
+     *
+     * @param userInput The input string entered by the user.
+     * @return The corresponding command.
+     * @throws InvalidArgumentException If the command format is incorrect.
+     * @throws InvalidCommandException If the command is unrecognized.
+     */
     public Command parse(String userInput) throws InvalidArgumentException, InvalidCommandException {
         String[] split = userInput.split("\\s+", 2);
         try {
