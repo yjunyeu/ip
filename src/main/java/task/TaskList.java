@@ -1,10 +1,5 @@
 package task;
 
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.ToDo;
-
 import java.util.ArrayList;
 public class TaskList {
     private final ArrayList<Task> tasks;
@@ -15,7 +10,7 @@ public class TaskList {
     public String listTasks() {
         StringBuilder listOfTasks = new StringBuilder(" Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
-            String numberedTask = " " + String.valueOf(i + 1) + ". " + tasks.get(i) + "\n";
+            String numberedTask = " " + (i + 1) + ". " + tasks.get(i) + "\n";
             listOfTasks.append(numberedTask);
         }
         return listOfTasks.toString();
@@ -40,6 +35,6 @@ public class TaskList {
         String deleteTaskDescription = tasks.get(index).toString();
         tasks.remove(index);
         return " Noted. I've removed this task:\n" + " " + deleteTaskDescription + "\n" + " Now you have " +
-                String.valueOf(tasks.size()) + " tasks in the list.\n";
+                tasks.size() + " tasks in the list.\n";
     }
 }

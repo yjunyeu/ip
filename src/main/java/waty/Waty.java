@@ -6,13 +6,13 @@ import parser.Parser;
 import storage.Storage;
 import task.TaskList;
 import ui.Ui;
-import commands.*;
+import commands.Command;
 
 public class Waty {
-    private Ui ui;
-    private Storage storage;
-    private TaskList tasks;
-    private Parser parser;
+    private final Ui ui;
+    private final Storage storage;
+    private final TaskList tasks;
+    private final Parser parser;
 
     public Waty() {
         this.ui = new Ui();
@@ -24,13 +24,13 @@ public class Waty {
 
     public void run() {
         ui.displayWelcome();
-        boolean running = true;
-        while (running) {
+        boolean isRunning = true;
+        while (isRunning) {
             try {
                 String userInput = ui.readCommand();
                 Command command = parser.parse(userInput);
                 command.execute(tasks, ui, storage);
-                running = command.isRunning();
+                isRunning = command.isRunning();
             } catch (InvalidArgumentException | InvalidCommandException e) {
                 ui.displayMessage(e.getMessage());
             } catch (Exception e) {
