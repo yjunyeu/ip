@@ -1,4 +1,5 @@
 package commands;
+
 import storage.Storage;
 import task.TaskList;
 import ui.Ui;
@@ -30,7 +31,7 @@ public class AddEventCommand extends Command{
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         int size = tasks.addTask(event);
-        ui.displayMessage(" Got it. I've added this task:\n" + " " + event.toString() + "\n" + " Now you have " +
-                String.valueOf(size) + " tasks in the list.\n");
+        ui.displayMessage(" Got it. I've added this task:\n" + " " + event + "\n" + " Now you have " +
+                size + " tasks in the list.\n");
     }
 }

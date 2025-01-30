@@ -1,4 +1,5 @@
 package storage;
+
 import task.Deadline;
 import task.Event;
 import task.Task;
@@ -75,7 +76,6 @@ public class Storage {
                 String data = storageReader.nextLine();
                 String[] args = data.split(" \\| ");
                 String type = args[0].trim();
-                ;
                 if (type.equals("T")) {
                     tasks.add(ToDo.loadTask(args));
                 } else if (type.equals("D")) {
