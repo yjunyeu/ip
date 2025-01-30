@@ -111,6 +111,20 @@ public class ParserTest {
         assertEquals("Example usage: delete 1\n", exception.getMessage());
     }
 
+    // Test valid "find" command
+    @Test
+    void testParseFindCommand() throws InvalidCommandException, InvalidArgumentException {
+        Command command = parser.parse("find book");
+        assertTrue(command instanceof FindCommand);
+    }
+
+    // Test invalid "find" command (missing keyword)
+    @Test
+    void testParseFindCommandWithoutKeyword() {
+        Exception exception = assertThrows(InvalidArgumentException.class, () -> parser.parse("find"));
+        assertEquals("Example usage: find book\n", exception.getMessage());
+    }
+
     // Test invalid command
     @Test
     void testParseInvalidCommand() {

@@ -31,6 +31,22 @@ public class TaskList {
         return listOfTasks.toString();
     }
 
+        /** Searches for tasks that contain the given keyword.
+            *
+            * @param keyword The keyword to search for.
+            * @return A formatted string of matching tasks.
+            */
+    public String findTasks(String keyword) {
+        StringBuilder matchingTasks = new StringBuilder(" Here are the matching tasks in your list:\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).toString().contains(keyword)) {
+                String matchedTask = " " + (i + 1) + ". " + tasks.get(i) + "\n";
+                matchingTasks.append(matchedTask);
+            }
+        }
+        return matchingTasks.toString();
+    }
+
     /**
      * Marks a task as completed.
      *
