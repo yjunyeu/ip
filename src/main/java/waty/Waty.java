@@ -8,12 +8,18 @@ import task.TaskList;
 import ui.Ui;
 import commands.*;
 
+/**
+ * The main class for the Waty chatbot application.
+ */
 public class Waty {
     private Ui ui;
     private Storage storage;
     private TaskList tasks;
     private Parser parser;
 
+    /**
+     * Constructs a new Waty instance, initializing components.
+     */
     public Waty() {
         this.ui = new Ui();
         this.storage = new Storage(ui);
@@ -22,6 +28,9 @@ public class Waty {
     }
 
 
+    /**
+     * Runs the main loop of the application, handling user input and executing commands.
+     */
     public void run() {
         ui.displayWelcome();
         boolean running = true;
@@ -39,6 +48,12 @@ public class Waty {
 
         }
     }
+
+    /**
+     * The main entry point of the application.
+     *
+     * @param args Command-line arguments (not used).
+     */
     public static void main(String[] args) {
         new Waty().run();
     }
