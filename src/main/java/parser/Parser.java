@@ -7,7 +7,7 @@ import task.Deadline;
 import task.Event;
 public class Parser {
     private enum Key {
-        LIST, BYE, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE;
+        LIST, BYE, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND
 
     }
     public Parser() {}
@@ -57,6 +57,11 @@ public class Parser {
                     }
                     int deleteIndex = Integer.parseInt(split[1].strip()) - 1;
                     return new DeleteCommand(deleteIndex);
+                case FIND:
+                    if (split.length < 2 || split[1].trim().isEmpty()) {
+                        throw new InvalidArgumentException("Example usage: find book\n");
+                    }
+                    return new FindCommand(split[1].strip());
                 default:
                     throw new InvalidCommandException("OOPS!!! What do you mean???\n");
             }
