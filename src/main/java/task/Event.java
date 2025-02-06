@@ -51,7 +51,7 @@ public class Event extends Task {
      */
     public static Event loadTask(String[] args) {
         String[] period = args[3].split("-");
-        Event event  = new Event(args[2], period[0], period[1]);
+        Event event = new Event(args[2], period[0], period[1]);
         if (args[1].equals("1")) {
             event.mark();
         }

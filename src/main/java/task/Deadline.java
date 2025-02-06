@@ -10,9 +10,11 @@ public class Deadline extends Task {
     private final LocalDateTime by;
 
     /**
-     * Constructs a Deadline task.
-     * @param description
-     * @param by
+     * Constructs a Deadline task with the specified description and due date.
+     *
+     * @param description The description of the deadline task.
+     * @param by The due date and time of the task in the format "yyyy-MM-dd HHmm".
+     *           Example: "2024-02-06 1530".
      */
 
     public Deadline(String description, String by) {
@@ -26,7 +28,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by.format(DateTimeFormatter.ofPattern("dd MMM yyyy HHmm")) + ")";
+        return "[D]" + super.toString() + " (by: " + this.by.format(DateTimeFormatter.ofPattern("dd MMM yyyy HHmm"))
+                + ")";
     }
 
     /**
@@ -45,7 +48,7 @@ public class Deadline extends Task {
      * @return A Deadline task.
      */
     public static Deadline loadTask(String[] args) {
-        Deadline deadline  = new Deadline(args[2], args[3]);
+        Deadline deadline = new Deadline(args[2], args[3]);
         if (args[1].equals("1")) {
             deadline.mark();
         }

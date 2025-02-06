@@ -5,8 +5,8 @@ import exceptions.InvalidCommandException;
 import parser.Parser;
 import storage.Storage;
 import task.TaskList;
-import ui.Ui;
 import commands.Command;
+import ui.Ui;
 
 /**
  * The main class for the Waty chatbot application.

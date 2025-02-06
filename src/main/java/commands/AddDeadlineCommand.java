@@ -1,14 +1,14 @@
 package commands;
 
 import storage.Storage;
+import task.Deadline;
 import task.TaskList;
 import ui.Ui;
-import task.Deadline;
 
 /**
  * Represents a command to add a Deadline task.
  */
-public class AddDeadlineCommand extends Command{
+public class AddDeadlineCommand extends Command {
 
     private final Deadline deadline;
 

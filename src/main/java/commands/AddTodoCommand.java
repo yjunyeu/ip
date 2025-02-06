@@ -2,13 +2,13 @@ package commands;
 
 import storage.Storage;
 import task.TaskList;
-import ui.Ui;
 import task.ToDo;
+import ui.Ui;
 
 /**
  * Represents a command to add a ToDo task.
  */
-public class AddTodoCommand extends Command{
+public class AddTodoCommand extends Command {
 
     private final ToDo todo;
 
@@ -30,7 +30,7 @@ public class AddTodoCommand extends Command{
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         int size = tasks.addTask(todo);
-        ui.displayMessage(" Got it. I've added this task:\n" + " " + todo + "\n" + " Now you have " +
-                size + " tasks in the list.\n");
+        ui.displayMessage(" Got it. I've added this task:\n" + " " + todo + "\n" + " Now you have "
+                + size + " tasks in the list.\n");
     }
 }

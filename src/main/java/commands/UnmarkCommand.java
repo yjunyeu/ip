@@ -7,7 +7,7 @@ import ui.Ui;
 /**
  * Represents a command to unmark a completed task (mark as not done).
  */
-public class UnmarkCommand extends Command{
+public class UnmarkCommand extends Command {
     private final int index;
 
     /**

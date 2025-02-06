@@ -7,7 +7,7 @@ import ui.Ui;
 /**
  * Represents a command to exit the application.
  */
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
 
     /**
      * Executes the exit command by saving tasks and displaying a goodbye message.

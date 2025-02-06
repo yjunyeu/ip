@@ -31,11 +31,11 @@ public class TaskList {
         return listOfTasks.toString();
     }
 
-        /** Searches for tasks that contain the given keyword.
-            *
-            * @param keyword The keyword to search for.
-            * @return A formatted string of matching tasks.
-            */
+    /**
+     * Searches for tasks that contain the given keyword.
+    * @param keyword The keyword to search for.
+    * @return A formatted string of matching tasks.
+    */
     public String findTasks(String keyword) {
         StringBuilder matchingTasks = new StringBuilder(" Here are the matching tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
@@ -89,7 +89,7 @@ public class TaskList {
     public String deleteTask(int index) {
         String deleteTaskDescription = tasks.get(index).toString();
         tasks.remove(index);
-        return " Noted. I've removed this task:\n" + " " + deleteTaskDescription + "\n" + " Now you have " +
-                tasks.size() + " tasks in the list.\n";
+        return " Noted. I've removed this task:\n" + " " + deleteTaskDescription + "\n" + " Now you have "
+                + tasks.size() + " tasks in the list.\n";
     }
 }

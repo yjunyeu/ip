@@ -1,23 +1,25 @@
 package storage;
 
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import task.Deadline;
 import task.Event;
 import task.Task;
 import task.ToDo;
 import ui.Ui;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.*;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.FileWriter;
-
 /**
  * Handles the storage and retrieval of tasks from a text file.
  */
 public class Storage {
-    private final Path STORAGE_DIR = Paths.get(System.getProperty("user.dir"),  "data");
-    private final Path STORAGE_FILE = STORAGE_DIR.resolve("waty.txt");
+    private final Path storageDir = Paths.get(System.getProperty("user.dir"), "data");
+    private final Path storageFile = storageDir.resolve("waty.txt");
 
     private final Ui ui;
     private final ArrayList<Task> tasks;
@@ -37,11 +39,11 @@ public class Storage {
      */
     private void setupStorage() {
         try {
-            if (!Files.exists(STORAGE_DIR)) {
-                Files.createDirectories(STORAGE_DIR);
+            if (!Files.exists(storageDir)) {
+                Files.createDirectories(storageDir);
             }
-            if (!Files.exists(STORAGE_FILE)) {
-                Files.createFile(STORAGE_FILE);
+            if (!Files.exists(storageFile)) {
+                Files.createFile(storageFile);
             }
         } catch (IOException e) {
             ui.displayError(e.getMessage());
@@ -53,7 +55,7 @@ public class Storage {
      */
     public void saveTasks() {
         try {
-            FileWriter storageWriter = new FileWriter(STORAGE_FILE.toFile());
+            FileWriter storageWriter = new FileWriter(storageFile.toFile());
             for (Task task: tasks) {
                 storageWriter.write(task.getSaveData() + "\n");
             }
@@ -71,7 +73,7 @@ public class Storage {
     public ArrayList<Task> loadTasks() {
         setupStorage();
         try {
-            Scanner storageReader = new Scanner(STORAGE_FILE.toFile());
+            Scanner storageReader = new Scanner(storageFile.toFile());
             while (storageReader.hasNextLine()) {
                 String data = storageReader.nextLine();
                 String[] args = data.split(" \\| ");

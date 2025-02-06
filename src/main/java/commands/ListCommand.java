@@ -7,7 +7,7 @@ import ui.Ui;
 /**
  * Represents a command to list all tasks.
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
     /**
      * Executes the list command by displaying all tasks in the task list.

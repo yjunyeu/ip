@@ -27,6 +27,16 @@ test {
     }
 }
 
+plugins {
+    id 'checkstyle'
+    // other plugins
+}
+
+checkstyle {
+    toolVersion = '10.2'
+}
+
+
 application {
     mainClass.set("waty.Waty")
 }

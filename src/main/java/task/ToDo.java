@@ -41,7 +41,7 @@ public class ToDo extends Task {
      * @return A ToDo task.
      */
     public static ToDo loadTask(String[] args) {
-        ToDo todo  = new ToDo(args[2]);
+        ToDo todo = new ToDo(args[2]);
         if (args[1].equals("1")) {
             todo.mark();
         }

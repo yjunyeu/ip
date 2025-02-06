@@ -7,7 +7,7 @@ import ui.Ui;
 /**
  * Represents an abstract command that can be executed.
  */
-abstract public class Command {
+public abstract class Command {
 
     /**
      * Executes the command.
