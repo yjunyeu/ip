@@ -4,15 +4,11 @@ import commands.Command;
 import exceptions.InvalidArgumentException;
 import exceptions.InvalidCommandException;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import parser.Parser;
-import storage.Storage;
-import task.TaskList;
 import ui.DialogBox;
 import ui.Ui;
 
@@ -27,29 +23,39 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private Waty waty;
     private Ui ui;
-    private Storage storage;
-    private TaskList tasks;
-    private Parser parser;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image watyImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/mcqueen.png"));
+    private final Image watyImage = new Image(this.getClass().getResourceAsStream("/images/wally.png"));
 
+    /**
+     * Initializes the GUI components.
+     * Binds the scroll pane's vertical scroll property to the dialog container height
+     * to ensure automatic scrolling as messages are added.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets the Waty chatbot instance and initializes the UI.
+     *
+     * @param waty The instance of {@code Waty} chatbot.
+     */
     public void setWaty(Waty waty) {
         this.waty = waty;
         this.ui = new Ui(this);
         ui.displayWelcome();
     }
 
+    /**
+     * Handles user input when the user presses Enter.
+     * Processes the command, updates the UI, and executes Waty's response.
+     * If Waty terminates, the application exits.
+     */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText().trim();
@@ -63,7 +69,8 @@ public class MainWindow extends AnchorPane {
             Command command = waty.getParser().parse(input);
             command.execute(waty.getTasks(), ui, waty.getStorage());
             if (!command.isRunning()) {
-                System.exit(0); // Close application if "bye" command is entered
+                ui.displayBye();
+                System.exit(0);
             }
         } catch (InvalidArgumentException | InvalidCommandException e) {
             ui.displayMessage(e.getMessage());
@@ -74,14 +81,29 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    /**
+     * Displays a message from Waty in the dialog container.
+     *
+     * @param message The Waty's response to display.
+     */
     public void displayBotMessage(String message) {
         dialogContainer.getChildren().add(DialogBox.getWatyDialog(message, watyImage));
     }
 
+    /**
+     * Displays a message from the user in the dialog container.
+     *
+     * @param message The user's input message to display.
+     */
     public void displayUserMessage(String message) {
         dialogContainer.getChildren().add(DialogBox.getUserDialog(message, userImage));
     }
 
+    /**
+     * Retrieves the current text input from the user.
+     *
+     * @return The text entered by the user in the input field.
+     */
     public String getUserInput() {
         return userInput.getText();
     }

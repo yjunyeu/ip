@@ -9,12 +9,17 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * The main entry point for the Waty chatbot GUI.
+ * A GUI for Waty using FXML.
  */
 public class Main extends Application {
 
-    private Waty waty = new Waty();
+    private final Waty waty = new Waty();
 
+    /**
+     * Starts the JavaFX application by loading the FXML layout and setting up the stage.
+     *
+     * @param stage The primary stage for the JavaFX application.
+     */
     @Override
     public void start(Stage stage) {
         try {
@@ -22,17 +27,11 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-
-            // Get the controller and inject dependencies
             fxmlLoader.<MainWindow>getController().setWaty(waty);
             stage.setTitle("Waty Chatbot");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }

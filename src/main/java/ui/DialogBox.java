@@ -15,7 +15,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 /**
- * Makes a dialogbox
+ * Represents a dialog box consisting of an ImageView to represent the speaker's face
+ * and a label containing text from the speaker.
  */
 public class DialogBox extends HBox {
     @FXML
@@ -23,6 +24,12 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Constructs a {@code DialogBox} instance by loading the corresponding FXML layout.
+     *
+     * @param text The message to be displayed in the dialog box.
+     * @param img  The image representing the speaker's avatar.
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/DialogBox.fxml"));
