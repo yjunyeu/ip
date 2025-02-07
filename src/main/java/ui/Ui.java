@@ -1,63 +1,62 @@
 package ui;
 
-import java.util.Scanner;
+import javafx.application.Platform;
+import waty.MainWindow;
 
 /**
  * Handles user interaction by displaying messages and reading input.
  */
 public class Ui {
-    private final Scanner scanner;
+    private final MainWindow mainWindow;
 
     /**
-     * Constructs a Ui instance with a Scanner to read user input.
-     */
-    public Ui() {
-        this.scanner = new Scanner(System.in);
-    }
-
-    /**
-     * Displays a message enclosed in horizontal lines.
+     * Constructs a {@code Ui} instance to manage interactions between the user and Waty.
      *
-     * @param content The message content to display.
+     * @param mainWindow The main window controller of the JavaFX application.
      */
-    public void displayMessage(String content) {
-        String horizontalLine = "____________________________________________________________\n";
-        String formatted = horizontalLine + content + horizontalLine;
-        System.out.println(formatted);
+    public Ui(MainWindow mainWindow) {
+        this.mainWindow = mainWindow;
     }
 
     /**
-     * Displays a welcome message when the application starts.
+     * Displays a message from Waty in the chat window.
+     *
+     * @param message The message to be displayed.
+     */
+    public void displayMessage(String message) {
+        Platform.runLater(() -> mainWindow.displayBotMessage(message));
+    }
+
+    /**
+     * Displays an error message in the chat window.
+     *
+     * @param errorMessage The error message to be displayed.
+     */
+    public void displayError(String errorMessage) {
+        Platform.runLater(() -> mainWindow.displayBotMessage("Error: " + errorMessage));
+    }
+
+    /**
+     * Displays the welcome message when Waty starts.
      */
     public void displayWelcome() {
-        displayMessage("""
-                 Hello! I'm Waty
-                 What can I do for you?
-                """);
+        Platform.runLater(() -> mainWindow.displayBotMessage("Hello! I'm Waty. What can I do for you?"));
     }
 
     /**
-     * Displays a goodbye message when the application exits.
+     * Displays the farewell message before exiting Waty.
      */
     public void displayBye() {
-        displayMessage(" Bye. Hope to see you again soon!\n");
+        Platform.runLater(() -> mainWindow.displayBotMessage("Bye. Hope to see you again soon!"));
     }
 
     /**
-     * Displays an error message.
+     * Reads the user's input from the GUI.
      *
-     * @param message The error message to display.
-     */
-    public void displayError(String message) {
-        displayMessage("Error: " + message);
-    }
-
-    /**
-     * Reads a command from the user input.
-     *
-     * @return The user input as a string.
+     * @return The text entered by the user in the input field.
      */
     public String readCommand() {
-        return scanner.nextLine() + "\n";
+        return mainWindow.getUserInput();
     }
 }
+

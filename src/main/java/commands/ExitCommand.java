@@ -26,5 +26,7 @@ public class ExitCommand extends Command {
      *
      * @return false, signaling the application should exit.
      */
-    public boolean isRunning() { return false; }
+    public boolean isRunning() {
+        return false;
+    }
 }

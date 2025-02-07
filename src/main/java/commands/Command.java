@@ -23,5 +23,7 @@ public abstract class Command {
      *
      * @return true if the application should continue running, false otherwise.
      */
-    public boolean isRunning() { return true; }
+    public boolean isRunning() {
+        return true;
+    }
 }

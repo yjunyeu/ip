@@ -1,18 +1,18 @@
 package waty;
 
+import commands.Command;
 import exceptions.InvalidArgumentException;
 import exceptions.InvalidCommandException;
 import parser.Parser;
 import storage.Storage;
 import task.TaskList;
-import commands.Command;
 import ui.Ui;
 
 /**
- * The main class for the Waty chatbot application.
+ * The main class for the Waty application.
  */
 public class Waty {
-    private final Ui ui;
+    private Ui ui;
     private final Storage storage;
     private final TaskList tasks;
     private final Parser parser;
@@ -21,15 +21,24 @@ public class Waty {
      * Constructs a new Waty instance, initializing components.
      */
     public Waty() {
-        this.ui = new Ui();
+        this.ui = null;
         this.storage = new Storage(ui);
         this.tasks = new TaskList(storage.loadTasks());
         this.parser = new Parser();
     }
 
+    /**
+     * Sets the UI instance for interaction.
+     *
+     * @param ui The UI instance to be used by Waty.
+     */
+    public void setUi(Ui ui) {
+        this.ui = ui;
+    }
 
     /**
-     * Runs the main loop of the application, handling user input and executing commands.
+     * Runs the main loop of the application, handling user input.
+     * (This method is now obsolete for GUI use but remains for CLI compatibility.)
      */
     public void run() {
         ui.displayWelcome();
@@ -45,12 +54,12 @@ public class Waty {
             } catch (Exception e) {
                 ui.displayError("ERRORRRRR!!! THIS IS WEIRD");
             }
-
         }
     }
 
     /**
      * The main entry point of the application.
+     * (No longer used with JavaFX, as Launcher.java starts the GUI.)
      *
      * @param args Command-line arguments (not used).
      */
@@ -58,4 +67,30 @@ public class Waty {
         new Waty().run();
     }
 
+    /**
+     * Retrieves the storage component of Waty.
+     *
+     * @return The {@link Storage} instance used by Waty.
+     */
+    public Storage getStorage() {
+        return storage;
+    }
+
+    /**
+     * Retrieves the task list managed by Waty.
+     *
+     * @return The {@link TaskList} instance storing tasks.
+     */
+    public TaskList getTasks() {
+        return tasks;
+    }
+
+    /**
+     * Retrieves the parser used to interpret user commands.
+     *
+     * @return The {@link Parser} instance handling command parsing.
+     */
+    public Parser getParser() {
+        return parser;
+    }
 }

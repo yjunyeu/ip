@@ -1,17 +1,22 @@
 package storage;
-import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import task.Task;
 import ui.Ui;
+
 import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class StorageTest {
     private Storage storage;
 
     @BeforeEach
     void setup() {
-        Ui mockUi = new Ui();
+        Ui mockUi = null;
         storage = new Storage(mockUi);
     }
 
