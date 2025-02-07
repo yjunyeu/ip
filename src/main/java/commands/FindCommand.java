@@ -8,15 +8,15 @@ import ui.Ui;
  * Represents a command to find tasks that match a keyword.
  */
 public class FindCommand extends Command {
-    private final String keyword;
+    private final String[] keywords;
 
     /**
      * Constructs a FindCommand with the given keyword.
      *
-     * @param keyword The keyword to search for in task descriptions.
+     * @param keywords The keyword to search for in task descriptions.
      */
-    public FindCommand(String keyword) {
-        this.keyword = keyword;
+    public FindCommand(String[] keywords) {
+        this.keywords = keywords;
     }
 
     /**
@@ -27,7 +27,7 @@ public class FindCommand extends Command {
      * @param storage The storage system (not modified in this command).
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        String results = tasks.findTasks(keyword);
+        String results = tasks.findTasks(keywords);
         ui.displayMessage(results);
     }
 }

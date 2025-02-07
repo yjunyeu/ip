@@ -90,7 +90,8 @@ public class Parser {
                 if (split.length < 2 || split[1].trim().isEmpty()) {
                     throw new InvalidArgumentException("Example usage: find book\n");
                 }
-                return new FindCommand(split[1].strip());
+                String[] keywords = split[1].strip().split("\\s+");
+                return new FindCommand(keywords);
             default:
                 throw new InvalidCommandException("OOPS!!! What do you mean???\n");
             }
