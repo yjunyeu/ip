@@ -7,19 +7,19 @@ import java.time.format.DateTimeFormatter;
  * Represents a task with a deadline
  */
 public class Deadline extends Task {
-    private final LocalDateTime by;
+    private final LocalDateTime dueDate;
 
     /**
      * Constructs a Deadline task with the specified description and due date.
      *
      * @param description The description of the deadline task.
-     * @param by The due date and time of the task in the format "yyyy-MM-dd HHmm".
+     * @param dueDate The due date and time of the task in the format "yyyy-MM-dd HHmm".
      *           Example: "2024-02-06 1530".
      */
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, String dueDate) {
         super(description);
-        this.by = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+        this.dueDate = LocalDateTime.parse(dueDate, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
     }
 
     /**
@@ -28,7 +28,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by.format(DateTimeFormatter.ofPattern("dd MMM yyyy HHmm"))
+        return "[D]" + super.toString() + " (by: "
+                + this.dueDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy HHmm"))
                 + ")";
     }
 
@@ -38,7 +39,8 @@ public class Deadline extends Task {
      */
     @Override
     public String getSaveData() {
-        return "D | " + super.getSaveData() + " | " + this.by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+        return "D | " + super.getSaveData() + " | "
+                + this.dueDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
     }
 
     /**

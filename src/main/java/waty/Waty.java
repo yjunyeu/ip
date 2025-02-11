@@ -56,17 +56,6 @@ public class Waty {
             }
         }
     }
-
-    /**
-     * The main entry point of the application.
-     * (No longer used with JavaFX, as Launcher.java starts the GUI.)
-     *
-     * @param args Command-line arguments (not used).
-     */
-    public static void main(String[] args) {
-        new Waty().run();
-    }
-
     /**
      * Retrieves the storage component of Waty.
      *
