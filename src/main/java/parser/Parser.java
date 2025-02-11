@@ -39,7 +39,11 @@ public class Parser {
      * @throws InvalidCommandException If the command is unrecognized.
      */
     public Command parse(String userInput) throws InvalidArgumentException, InvalidCommandException {
+        assert userInput != null : "User input should not be null";
+        assert !userInput.trim().isEmpty() : "User input should not be empty";
+
         String[] split = userInput.split("\\s+", 2);
+        assert split.length > 0 : "Command should not be empty";
         try {
             Key key = Key.valueOf(split[0].toUpperCase());
             switch (key) {

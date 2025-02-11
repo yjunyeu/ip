@@ -14,6 +14,7 @@ public class TaskList {
      * @param tasks The list of tasks to be managed.
      */
     public TaskList(ArrayList<Task> tasks) {
+        assert tasks != null : "Task list should not be null";
         this.tasks = tasks;
     }
 
@@ -23,6 +24,7 @@ public class TaskList {
      * @return A string representation of the task list.
      */
     public String listTasks() {
+        assert tasks != null : "TaskList must be initialised";
         StringBuilder listOfTasks = new StringBuilder(" Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
             String numberedTask = " " + (i + 1) + ". " + tasks.get(i) + "\n";
