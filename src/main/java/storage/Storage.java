@@ -30,6 +30,7 @@ public class Storage {
      * @param ui The user interface instance to display messages.
      */
     public Storage(Ui ui) {
+        assert ui != null : "Ui should be initialised";
         this.ui = ui;
         tasks = new ArrayList<>();
     }
@@ -48,6 +49,8 @@ public class Storage {
         } catch (IOException e) {
             ui.displayError(e.getMessage());
         }
+        assert Files.exists(storageDir) : "Storage directory should be present";
+        assert Files.exists(storageFile) : "Storage file should be present";
     }
 
     /**
