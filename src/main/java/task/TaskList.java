@@ -1,6 +1,9 @@
 package task;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Represents a list of tasks.
@@ -40,11 +43,13 @@ public class TaskList {
     */
     public String findTasks(String... keywords) {
         StringBuilder matchingTasks = new StringBuilder(" Here are the matching tasks in your list:\n");
+        Set<Integer> foundIndices = new HashSet<>();
         for (String keyword : keywords) {
             for (int i = 0; i < tasks.size(); i++) {
-                if (tasks.get(i).toString().contains(keyword)) {
+                if (tasks.get(i).toString().contains(keyword) && !foundIndices.contains(i)) {
                     String matchedTask = " " + (i + 1) + ". " + tasks.get(i) + "\n";
                     matchingTasks.append(matchedTask);
+                    foundIndices.add(i);
                 }
             }
         }
@@ -95,5 +100,15 @@ public class TaskList {
         tasks.remove(index);
         return " Noted. I've removed this task:\n" + " " + deleteTaskDescription + "\n" + " Now you have "
                 + tasks.size() + " tasks in the list.\n";
+    }
+    /**
+     * Sorts the tasks by date, prioritizing Deadlines and Events.
+     * - Deadlines are sorted by due date.
+     * - Events are sorted by start date.
+     * - ToDo tasks, which do not have a date, are moved to the end.
+     */
+    public String sortByDate() {
+        Collections.sort(tasks, new DateComparator());
+        return "Tasks have been sorted by date.";
     }
 }
