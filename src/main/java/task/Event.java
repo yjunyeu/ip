@@ -57,4 +57,12 @@ public class Event extends Task {
         }
         return event;
     }
+
+    /**
+     * Returns the start date of the event.
+     * @return The start date as a LocalDateTime object.
+     */
+    public LocalDateTime getFromDate() {
+        return from;
+    }
 }

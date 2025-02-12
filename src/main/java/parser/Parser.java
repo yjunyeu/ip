@@ -9,6 +9,7 @@ import commands.ExitCommand;
 import commands.FindCommand;
 import commands.ListCommand;
 import commands.MarkCommand;
+import commands.SortChronoCommand;
 import commands.UnmarkCommand;
 import exceptions.InvalidArgumentException;
 import exceptions.InvalidCommandException;
@@ -22,7 +23,7 @@ public class Parser {
      * Enumeration of command keywords.
      */
     private enum Key {
-        LIST, BYE, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND
+        LIST, BYE, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND, SORT
     }
 
     /**
@@ -96,6 +97,8 @@ public class Parser {
                 }
                 String[] keywords = split[1].strip().split("\\s+");
                 return new FindCommand(keywords);
+            case SORT:
+                return new SortChronoCommand();
             default:
                 throw new InvalidCommandException("OOPS!!! What do you mean???\n");
             }
