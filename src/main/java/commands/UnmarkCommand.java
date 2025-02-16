@@ -27,6 +27,10 @@ public class UnmarkCommand extends Command {
      * @param storage The storage system (not modified in this command).
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.displayMessage(" OK, I've marked this task as not done yet:\n " + tasks.unmarkTask(index) + "\n");
+        try {
+            ui.displayMessage(" OK, I've marked this task as not done yet:\n " + tasks.unmarkTask(index) + "\n");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            ui.displayError("The index is invalid.");
+        }
     }
 }

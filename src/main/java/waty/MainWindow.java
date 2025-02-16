@@ -48,6 +48,7 @@ public class MainWindow extends AnchorPane {
     public void setWaty(Waty waty) {
         this.waty = waty;
         this.ui = new Ui(this);
+        waty.setUi(this.ui);
         ui.displayWelcome();
     }
 
@@ -73,7 +74,7 @@ public class MainWindow extends AnchorPane {
                 System.exit(0);
             }
         } catch (InvalidArgumentException | InvalidCommandException e) {
-            ui.displayMessage(e.getMessage());
+            ui.displayError(e.getMessage());
         } catch (Exception e) {
             ui.displayError("ERRORRRRR!!! THIS IS WEIRD");
         }

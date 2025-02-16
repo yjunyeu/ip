@@ -2,22 +2,21 @@ package task;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Represents a list of tasks.
  */
 public class TaskList {
-    private final ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     /**
      * Constructs a TaskList with the given tasks.
      *
-     * @param tasks The list of tasks to be managed.
      */
-    public TaskList(ArrayList<Task> tasks) {
-        assert tasks != null : "Task list should not be null";
+    public TaskList() {
+        this.tasks = null;
+    }
+    public void setTasks(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
@@ -43,13 +42,12 @@ public class TaskList {
     */
     public String findTasks(String... keywords) {
         StringBuilder matchingTasks = new StringBuilder(" Here are the matching tasks in your list:\n");
-        Set<Integer> foundIndices = new HashSet<>();
-        for (String keyword : keywords) {
-            for (int i = 0; i < tasks.size(); i++) {
-                if (tasks.get(i).toString().contains(keyword) && !foundIndices.contains(i)) {
+        for (int i = 0; i < tasks.size(); i++) {
+            for (String keyword : keywords) {
+                if (tasks.get(i).toString().contains(keyword)) {
                     String matchedTask = " " + (i + 1) + ". " + tasks.get(i) + "\n";
                     matchingTasks.append(matchedTask);
-                    foundIndices.add(i);
+                    break;
                 }
             }
         }
@@ -62,7 +60,10 @@ public class TaskList {
      * @param index The index of the task to be marked.
      * @return The updated task.
      */
-    public Task markTask(int index) {
+    public Task markTask(int index) throws ArrayIndexOutOfBoundsException {
+        if (index < 0 || index >= tasks.size()) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
         tasks.get(index).mark();
         return tasks.get(index);
     }
@@ -73,7 +74,10 @@ public class TaskList {
      * @param index The index of the task to be unmarked.
      * @return The updated task.
      */
-    public Task unmarkTask(int index) {
+    public Task unmarkTask(int index) throws ArrayIndexOutOfBoundsException {
+        if (index < 0 || index >= tasks.size()) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
         tasks.get(index).unmark();
         return tasks.get(index);
     }
@@ -95,7 +99,10 @@ public class TaskList {
      * @param index The index of the task to be removed.
      * @return A message confirming the task removal.
      */
-    public String deleteTask(int index) {
+    public String deleteTask(int index) throws ArrayIndexOutOfBoundsException {
+        if (index < 0 || index >= tasks.size()) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
         String deleteTaskDescription = tasks.get(index).toString();
         tasks.remove(index);
         return " Noted. I've removed this task:\n" + " " + deleteTaskDescription + "\n" + " Now you have "

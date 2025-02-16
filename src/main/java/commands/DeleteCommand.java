@@ -27,6 +27,10 @@ public class DeleteCommand extends Command {
      * @param storage The storage system for saving data.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.displayMessage(tasks.deleteTask(index));
+        try {
+            ui.displayMessage(tasks.deleteTask(index));
+        } catch (ArrayIndexOutOfBoundsException e) {
+            ui.displayError("The index is invalid.");
+        }
     }
 }

@@ -27,6 +27,10 @@ public class MarkCommand extends Command {
      * @param storage The storage system (not modified in this command).
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.displayMessage(" Nice! I've marked this task as done:\n " + tasks.markTask(index) + "\n");
+        try {
+            ui.displayMessage(" Nice! I've marked this task as done:\n " + tasks.markTask(index) + "\n");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            ui.displayError("The index is invalid.");
+        }
     }
 }

@@ -20,6 +20,9 @@ public class Event extends Task {
         super(description);
         this.from = LocalDateTime.parse(from, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
         this.to = LocalDateTime.parse(to, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+        if (this.to.isBefore(this.from) || this.to.isEqual(this.from)) {
+            throw new IllegalArgumentException("'to' date must be after 'from' date");
+        }
     }
 
     /**
@@ -40,7 +43,7 @@ public class Event extends Task {
     @Override
     public String getSaveData() {
         return "E | " + super.getSaveData() + " | " + this.from.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"))
-                + "-" + this.to.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+                + "<>" + this.to.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
     }
 
     /**
@@ -50,7 +53,7 @@ public class Event extends Task {
      * @return An Event task.
      */
     public static Event loadTask(String[] args) {
-        String[] period = args[3].split("-");
+        String[] period = args[3].split("<>");
         Event event = new Event(args[2], period[0], period[1]);
         if (args[1].equals("1")) {
             event.mark();

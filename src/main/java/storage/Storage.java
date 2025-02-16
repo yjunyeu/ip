@@ -9,10 +9,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.ToDo;
+import task.*;
 import ui.Ui;
 /**
  * Handles the storage and retrieval of tasks from a text file.
@@ -21,17 +18,14 @@ public class Storage {
     private final Path storageDir = Paths.get(System.getProperty("user.dir"), "data");
     private final Path storageFile = storageDir.resolve("waty.txt");
 
-    private final Ui ui;
+    private Ui ui;
     private final ArrayList<Task> tasks;
 
     /**
      * Constructs a Storage instance.
      *
-     * @param ui The user interface instance to display messages.
      */
-    public Storage(Ui ui) {
-        assert ui != null : "Ui should be initialised";
-        this.ui = ui;
+    public Storage() {
         tasks = new ArrayList<>();
     }
 
@@ -98,5 +92,9 @@ public class Storage {
             ui.displayError(e.getMessage());
         }
         return tasks;
+    }
+    public void setUi(Ui ui, TaskList tasks) {
+        this.ui = ui;
+        tasks.setTasks(loadTasks());
     }
 }
