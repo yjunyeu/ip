@@ -4,7 +4,7 @@ package task;
  * Represents an abstract task that can be marked done or left unmarked.
  */
 public abstract class Task {
-    private boolean status;
+    private boolean isDone;
     private final String description;
 
     /**
@@ -14,21 +14,21 @@ public abstract class Task {
      */
     Task(String description) {
         this.description = description;
-        this.status = false;
+        this.isDone = false;
     }
 
     /**
      * Marks the task as not completed.
      */
     public void unmark() {
-        this.status = false;
+        this.isDone = false;
     }
 
     /**
      * Marks the task as completed.
      */
     public void mark() {
-        this.status = true;
+        this.isDone = true;
     }
 
     /**
@@ -37,7 +37,7 @@ public abstract class Task {
      * @return A string formatted for storage purposes.
      */
     public String getSaveData() {
-        return (this.status ? "1 | " : "0 | ") + this.description;
+        return (this.isDone ? "1 | " : "0 | ") + this.description;
     }
 
     /**
@@ -57,7 +57,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        if (this.status) {
+        if (this.isDone) {
             return "[X] " + this.description;
         } else {
             return "[ ] " + this.description;
