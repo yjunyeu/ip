@@ -1,5 +1,8 @@
 package commands;
 
+import java.time.format.DateTimeParseException;
+
+import exceptions.InvalidArgumentException;
 import storage.Storage;
 import task.Event;
 import task.TaskList;
@@ -18,8 +21,14 @@ public class AddEventCommand extends Command {
      * @param from The start time in the format "yyyy-MM-dd HHmm".
      * @param to The end time in the format "yyyy-MM-dd HHmm".
      */
-    public AddEventCommand(String description, String from, String to) {
-        this.event = new Event(description, from, to);
+    public AddEventCommand(String description, String from, String to) throws InvalidArgumentException {
+        try {
+            this.event = new Event(description, from, to);
+        } catch (DateTimeParseException e) {
+            throw new InvalidArgumentException("Dates must be in the format 'yyyy-MM-dd HHmm'");
+        } catch (IllegalArgumentException e) {
+            throw new InvalidArgumentException(e.getMessage());
+        }
     }
 
     /**

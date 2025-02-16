@@ -21,9 +21,8 @@ public class Waty {
      * Constructs a new Waty instance, initializing components.
      */
     public Waty() {
-        this.ui = null;
-        this.storage = new Storage(ui);
-        this.tasks = new TaskList(storage.loadTasks());
+        this.storage = new Storage();
+        this.tasks = new TaskList();
         this.parser = new Parser();
     }
 
@@ -34,6 +33,7 @@ public class Waty {
      */
     public void setUi(Ui ui) {
         this.ui = ui;
+        this.storage.setUi(ui, tasks);
     }
 
     /**

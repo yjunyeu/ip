@@ -1,9 +1,13 @@
 package commands;
 
+import java.time.format.DateTimeParseException;
+
+import exceptions.InvalidArgumentException;
 import storage.Storage;
 import task.Deadline;
 import task.TaskList;
 import ui.Ui;
+
 
 /**
  * Represents a command to add a Deadline task.
@@ -18,8 +22,12 @@ public class AddDeadlineCommand extends Command {
      * @param description The description of the deadline task.
      * @param by The due date and time in the format "yyyy-MM-dd HHmm".
      */
-    public AddDeadlineCommand(String description, String by) {
-        this.deadline = new Deadline(description, by);
+    public AddDeadlineCommand(String description, String by) throws InvalidArgumentException {
+        try {
+            this.deadline = new Deadline(description, by);
+        } catch (DateTimeParseException e) {
+            throw new InvalidArgumentException("Deadline must be in the format 'yyyy-MM-dd HHmm'");
+        }
     }
 
     /**
