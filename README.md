@@ -1,5 +1,5 @@
 # Waty User Guide
-![Screenshot of Ui](Ui.png)
+![Screenshot of Ui](./docs/Ui.png)
 
 ## Introduction
 Waty is a Personal Assistant Chatbot that helps you create and track different types
