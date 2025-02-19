@@ -22,18 +22,18 @@ java -jar waty.jar
 7. Error Handling: Shows errors with red-coloured messages when invalid commands are entered.
 
 ## Commands
-| Command                                                                  | Description                           |
-|--------------------------------------------------------------------------|---------------------------------------|
-| `todo [task description]`                                                | Adds a ToDo task                      |
-| `deadline [task description] /by [yyyy-MM-dd HHmm]`                      | Adds a Deadline task                  |
-| `event [task description] /from [yyyy-MM-dd HHmm] /to [yyyy-MM-dd HHmm]` | Adds an Event task                    |
-| `list`                                                                   | Lists all tasks                       |
-| `mark [task number]`                                                     | Marks a task as done                  |
-| `unmark [task number]`                                                   | Marks a task as not done              |
-| `delete [task number]`                                                   | Deletes a task                        |
-| `find [keywords...]`                                                     | Finds tasks by keyword                |
-| `sort`                                                                   | Sort all tasks by chronological order |
-| `bye`                                                                    | Exits the program                     |
+| Command                                                               | Description                           |
+|-----------------------------------------------------------------------|---------------------------------------|
+| `todo [description]`                                               | Adds a ToDo task                      |
+| `deadline [description] /by [yyyy-MM-dd HHmm]`                     | Adds a Deadline task                  |
+| `event [description] /from [yyyy-MM-dd HHmm] /to [yyyy-MM-dd HHmm]` | Adds an Event task                    |
+| `list`                                                                | Lists all tasks                       |
+| `mark [task number]`                                                  | Marks a task as done                  |
+| `unmark [task number]`                                                | Marks a task as not done              |
+| `delete [task number]`                                                | Deletes a task                        |
+| `find [keywords...]`                                                  | Finds tasks by keyword                |
+| `sort`                                                                | Sort all tasks by chronological order |
+| `bye`                                                                 | Exits the program                     |
 
 
 ## Requirements
