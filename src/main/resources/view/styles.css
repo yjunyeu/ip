@@ -1,0 +1,17 @@
+.user-dialog {
+    -fx-background-color: #d4edda;
+    -fx-background-radius: 15;
+    -fx-padding: 10;
+}
+
+.bot-dialog {
+    -fx-background-color: #cce5ff;
+    -fx-background-radius: 15;
+    -fx-padding: 10;
+}
+
+.error-dialog {
+    -fx-background-color: #f8d7da;
+    -fx-background-radius: 15;
+    -fx-padding: 10;
+}

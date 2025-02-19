@@ -27,8 +27,8 @@ public class MainWindow extends AnchorPane {
     private Waty waty;
     private Ui ui;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/mcqueen.png"));
-    private final Image watyImage = new Image(this.getClass().getResourceAsStream("/images/wally.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private final Image watyImage = new Image(this.getClass().getResourceAsStream("/images/waty.png"));
 
     /**
      * Initializes the GUI components.
@@ -89,6 +89,14 @@ public class MainWindow extends AnchorPane {
      */
     public void displayBotMessage(String message) {
         dialogContainer.getChildren().add(DialogBox.getWatyDialog(message, watyImage));
+    }
+    /**
+     * Displays an error message from Waty in the dialog container.
+     *
+     * @param message The Waty's error response to display.
+     */
+    public void displayErrorMessage(String message) {
+        dialogContainer.getChildren().add(DialogBox.getErrorDialog(message, watyImage));
     }
 
     /**
