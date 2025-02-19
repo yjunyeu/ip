@@ -1,26 +1,82 @@
-# Duke project template
+# Waty User Guide
+![Screenshot of Ui](Ui.png)
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+## Introduction
+Waty is a Personal Assistant Chatbot that helps you create and track different types
+of tasks: ToDos, Deadlines and Events. Waty also allow you to search, sort and 
+organise your tasks efficiently.
 
-## Setting up in Intellij
+## Getting Started
+To launch Waty, run this command in the terminal:
+```
+java -jar waty.jar
+```
 
-Prerequisites: JDK 17, update Intellij to the most recent version.
+## Features
+1. Add Tasks: Add ToDo, Deadline, or Event tasks.
+2. Mark/ Unmark Tasks: Mark tasks as done or undone.
+3. Delete Tasks: Remove tasks from the list.
+4. Find Tasks: Search for tasks by keyword.
+5. Sort Tasks: Arrange tasks chronologically by date.
+6. Data Persistence: Automatically saves tasks to a .txt file and loads them upon startuo.
+7. Error Handling: Shows errors with red-coloured messages when invalid commands are entered.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 17** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-1. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+## Commands
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>todo [task description]</code></td>
+      <td>Adds a ToDo task</td>
+    </tr>
+    <tr>
+      <td><code>deadline [task description] /by [yyyy-MM-dd HHmm]</code></td>
+      <td>Adds a Deadline task</td>
+    </tr>
+    <tr>
+      <td><code>event [task description] /from [yyyy-MM-dd HHmm] /to [yyyy-MM-dd HHmm]</code></td>
+      <td>Adds an Event task</td>
+    </tr>
+    <tr>
+      <td><code>list</code></td>
+      <td>Lists all tasks</td>
+    </tr>
+    <tr>
+      <td><code>mark [task number]</code></td>
+      <td>Marks a task as done</td>
+    </tr>
+    <tr>
+      <td><code>unmark [task number]</code></td>
+      <td>Marks a task as not done</td>
+    </tr>
+    <tr>
+      <td><code>delete [task number]</code></td>
+      <td>Deletes a task</td>
+    </tr>
+    <tr>
+      <td><code>find [keywords...]</code></td>
+      <td>Finds tasks by keyword</td>
+    </tr>
+    <tr>
+      <td><code>sort</code></td>
+      <td>Sort all tasks by chronological order</td>
+    </tr>
+    <tr>
+      <td><code>bye</code></td>
+      <td>Exits the program</td>
+    </tr>
+  </tbody>
+</table>
 
-**Warning:** Keep the `src\main\java` folder as the root folder for Java files (i.e., don't rename those folders or move Java files to another folder outside of this folder path), as this is the default location some tools (e.g., Gradle) expect to find Java files.
+
+## Requirements
+Java 11 or higher
+
+## File Management
+Tasks are saved to a file named `waty.txt` in a `data` folder.  
+You can delete this file to clear your tasks.
