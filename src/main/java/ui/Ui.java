@@ -33,7 +33,7 @@ public class Ui {
      * @param errorMessage The error message to be displayed.
      */
     public void displayError(String errorMessage) {
-        Platform.runLater(() -> mainWindow.displayBotMessage("Error: " + errorMessage));
+        Platform.runLater(() -> mainWindow.displayErrorMessage("Error: " + errorMessage));
     }
 
     /**

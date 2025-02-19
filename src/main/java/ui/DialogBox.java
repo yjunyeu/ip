@@ -58,14 +58,24 @@ public class DialogBox extends HBox {
      * Creates a dialog box for the user's message.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
+        db.dialog.getStyleClass().add("user-dialog");
+        return db;
     }
 
     /**
      * Creates a flipped dialog box for Waty's response.
      */
     public static DialogBox getWatyDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
+        db.dialog.getStyleClass().add("bot-dialog");
+        db.flip();
+        return db;
+    }
+
+    public static DialogBox getErrorDialog(String text, Image img) {
+        DialogBox db = new DialogBox(text, img);
+        db.dialog.getStyleClass().add("error-dialog");
         db.flip();
         return db;
     }
