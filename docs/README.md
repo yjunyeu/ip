@@ -35,6 +35,7 @@ java -jar waty.jar
 | `sort`                                                                   | Sort all tasks by chronological order |
 | `bye`                                                                    | Exits the program                     |
 
+
 ## Requirements
 Java 11 or higher
 
