@@ -17,6 +17,6 @@ public class EventTest {
     @Test
     void testSaveData() {
         Event event = new Event("Conference", "2025-04-10 0900", "2025-04-10 1700");
-        assertEquals("E | 0 | Conference | 2025-04-10 0900-2025-04-10 1700", event.getSaveData());
+        assertEquals("E | 0 | Conference | 2025-04-10 0900<>2025-04-10 1700", event.getSaveData());
     }
 }

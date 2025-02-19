@@ -13,7 +13,8 @@ public class TaskListTest {
 
     @BeforeEach
     void setup() {
-        taskList = new TaskList(new ArrayList<>());
+        taskList = new TaskList();
+        taskList.setTasks(new ArrayList<Task>());
     }
 
     @Test

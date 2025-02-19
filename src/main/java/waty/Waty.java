@@ -1,8 +1,5 @@
 package waty;
 
-import commands.Command;
-import exceptions.InvalidArgumentException;
-import exceptions.InvalidCommandException;
 import parser.Parser;
 import storage.Storage;
 import task.TaskList;
@@ -34,27 +31,6 @@ public class Waty {
     public void setUi(Ui ui) {
         this.ui = ui;
         this.storage.setUi(ui, tasks);
-    }
-
-    /**
-     * Runs the main loop of the application, handling user input.
-     * (This method is now obsolete for GUI use but remains for CLI compatibility.)
-     */
-    public void run() {
-        ui.displayWelcome();
-        boolean isRunning = true;
-        while (isRunning) {
-            try {
-                String userInput = ui.readCommand();
-                Command command = parser.parse(userInput);
-                command.execute(tasks, ui, storage);
-                isRunning = command.isRunning();
-            } catch (InvalidArgumentException | InvalidCommandException e) {
-                ui.displayMessage(e.getMessage());
-            } catch (Exception e) {
-                ui.displayError("ERRORRRRR!!! THIS IS WEIRD");
-            }
-        }
     }
     /**
      * Retrieves the storage component of Waty.

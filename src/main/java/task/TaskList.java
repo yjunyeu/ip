@@ -1,7 +1,6 @@
 package task;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * Represents a list of tasks.
@@ -115,7 +114,7 @@ public class TaskList {
      * - ToDo tasks, which do not have a date, are moved to the end.
      */
     public String sortByDate() {
-        Collections.sort(tasks, new DateComparator());
+        tasks.sort(new DateComparator());
         return "Tasks have been sorted by date.";
     }
 }

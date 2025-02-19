@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import task.Task;
+import task.TaskList;
 import ui.Ui;
 
 import java.util.ArrayList;
@@ -17,7 +18,9 @@ public class StorageTest {
     @BeforeEach
     void setup() {
         Ui mockUi = null;
-        storage = new Storage(mockUi);
+        TaskList mockTasks = new TaskList();
+        storage = new Storage();
+        storage.setUi(mockUi, mockTasks);
     }
 
     @Test

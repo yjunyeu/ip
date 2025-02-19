@@ -29,11 +29,11 @@ dependencies {
 }
 
 tasks.named('test') {
-    enabled = false
+    enabled = true
 }
 
 tasks.withType(Test).configureEach {
-    enabled = false
+    enabled = true
 }
 
 checkstyle {
@@ -47,6 +47,21 @@ tasks.withType(Checkstyle).configureEach {
 application {
     mainClass.set("waty.Launcher")
 }
+
+test {
+    useJUnitPlatform()
+
+    testLogging {
+        events "passed", "skipped", "failed"
+
+        showExceptions true
+        exceptionFormat "full"
+        showCauses true
+        showStackTraces true
+        showStandardStreams = false
+    }
+}
+
 
 shadowJar {
     archiveBaseName = "waty"
