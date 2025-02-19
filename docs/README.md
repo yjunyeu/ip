@@ -22,18 +22,56 @@ java -jar waty.jar
 7. Error Handling: Shows errors with red-coloured messages when invalid commands are entered.
 
 ## Commands
-| Command                                                               | Description                           |
-|-----------------------------------------------------------------------|---------------------------------------|
-| `todo [description]`                                               | Adds a ToDo task                      |
-| `deadline [description] /by [yyyy-MM-dd HHmm]`                     | Adds a Deadline task                  |
-| `event [description] /from [yyyy-MM-dd HHmm] /to [yyyy-MM-dd HHmm]` | Adds an Event task                    |
-| `list`                                                                | Lists all tasks                       |
-| `mark [task number]`                                                  | Marks a task as done                  |
-| `unmark [task number]`                                                | Marks a task as not done              |
-| `delete [task number]`                                                | Deletes a task                        |
-| `find [keywords...]`                                                  | Finds tasks by keyword                |
-| `sort`                                                                | Sort all tasks by chronological order |
-| `bye`                                                                 | Exits the program                     |
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>todo [task description]</code></td>
+      <td>Adds a ToDo task</td>
+    </tr>
+    <tr>
+      <td><code>deadline [task description] /by [yyyy-MM-dd HHmm]</code></td>
+      <td>Adds a Deadline task</td>
+    </tr>
+    <tr>
+      <td><code>event [task description] /from [yyyy-MM-dd HHmm] /to [yyyy-MM-dd HHmm]</code></td>
+      <td>Adds an Event task</td>
+    </tr>
+    <tr>
+      <td><code>list</code></td>
+      <td>Lists all tasks</td>
+    </tr>
+    <tr>
+      <td><code>mark [task number]</code></td>
+      <td>Marks a task as done</td>
+    </tr>
+    <tr>
+      <td><code>unmark [task number]</code></td>
+      <td>Marks a task as not done</td>
+    </tr>
+    <tr>
+      <td><code>delete [task number]</code></td>
+      <td>Deletes a task</td>
+    </tr>
+    <tr>
+      <td><code>find [keywords...]</code></td>
+      <td>Finds tasks by keyword</td>
+    </tr>
+    <tr>
+      <td><code>sort</code></td>
+      <td>Sort all tasks by chronological order</td>
+    </tr>
+    <tr>
+      <td><code>bye</code></td>
+      <td>Exits the program</td>
+    </tr>
+  </tbody>
+</table>
 
 
 ## Requirements
