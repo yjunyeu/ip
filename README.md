@@ -18,7 +18,7 @@ java -jar waty.jar
 3. Delete Tasks: Remove tasks from the list.
 4. Find Tasks: Search for tasks by keyword.
 5. Sort Tasks: Arrange tasks chronologically by date.
-6. Data Persistence: Automatically saves tasks to a .txt file and loads them upon startuo.
+6. Data Persistence: Automatically saves tasks to a .txt file and loads them upon startup.
 7. Error Handling: Shows errors with red-coloured messages when invalid commands are entered.
 
 ## Commands
