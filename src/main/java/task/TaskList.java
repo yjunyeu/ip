@@ -2,6 +2,8 @@ package task;
 
 import java.util.ArrayList;
 
+import exceptions.InvalidArgumentException;
+
 /**
  * Represents a list of tasks.
  */
@@ -59,7 +61,7 @@ public class TaskList {
      * @param index The index of the task to be marked.
      * @return The updated task.
      */
-    public Task markTask(int index) throws ArrayIndexOutOfBoundsException {
+    public Task markTask(int index) throws ArrayIndexOutOfBoundsException, InvalidArgumentException {
         if (index < 0 || index >= tasks.size()) {
             throw new ArrayIndexOutOfBoundsException();
         }
@@ -73,7 +75,7 @@ public class TaskList {
      * @param index The index of the task to be unmarked.
      * @return The updated task.
      */
-    public Task unmarkTask(int index) throws ArrayIndexOutOfBoundsException {
+    public Task unmarkTask(int index) throws ArrayIndexOutOfBoundsException, InvalidArgumentException {
         if (index < 0 || index >= tasks.size()) {
             throw new ArrayIndexOutOfBoundsException();
         }

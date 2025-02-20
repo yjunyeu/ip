@@ -3,6 +3,8 @@ package task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import exceptions.InvalidArgumentException;
+
 /**
  * Represents a task with a deadline
  */
@@ -49,7 +51,7 @@ public class Deadline extends Task {
      * @param args The stored data array.
      * @return A Deadline task.
      */
-    public static Deadline loadTask(String[] args) {
+    public static Deadline loadTask(String[] args) throws InvalidArgumentException {
         Deadline deadline = new Deadline(args[2], args[3]);
         if (args[1].equals("1")) {
             deadline.mark();

@@ -1,7 +1,10 @@
 package task;
 
+import exceptions.InvalidArgumentException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.fail;
+
 
 import java.util.ArrayList;
 
@@ -26,14 +29,22 @@ public class TaskListTest {
     @Test
     void testMarkTask() {
         taskList.addTask(new ToDo("Read a book"));
-        assertTrue(taskList.markTask(0).toString().contains("[X]"), "Task should be marked");
+        try {
+            assertTrue(taskList.markTask(0).toString().contains("[X]"), "Task should be marked");
+        } catch (InvalidArgumentException e) {
+            fail("Exception should not have been thrown when marking a task");
+        }
     }
 
     @Test
     void testUnmarkTask() {
         taskList.addTask(new ToDo("Read a book"));
-        taskList.markTask(0);
-        assertTrue(taskList.unmarkTask(0).toString().contains("[ ]"), "Task should be unmarked");
+        try {
+            taskList.markTask(0);
+            assertTrue(taskList.unmarkTask(0).toString().contains("[ ]"), "Task should be unmarked");
+        } catch (InvalidArgumentException e) {
+            fail("Exeption should not have been thrown when unmarking a task");
+        }
     }
 
     @Test

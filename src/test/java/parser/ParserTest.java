@@ -96,7 +96,7 @@ public class ParserTest {
                 InvalidArgumentException.class,
                 () -> parser.parse("deadline Submit report")
         );
-        assertEquals("The deadline task must include a description and a '/by' argument.\n", exception.getMessage());
+        assertEquals("The deadline task must contain a '/by' argument.\n", exception.getMessage());
     }
 
     @Test

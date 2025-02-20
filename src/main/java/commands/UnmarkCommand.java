@@ -1,5 +1,6 @@
 package commands;
 
+import exceptions.InvalidArgumentException;
 import storage.Storage;
 import task.TaskList;
 import ui.Ui;
@@ -31,6 +32,8 @@ public class UnmarkCommand extends Command {
             ui.displayMessage(" OK, I've marked this task as not done yet:\n " + tasks.unmarkTask(index) + "\n");
         } catch (ArrayIndexOutOfBoundsException e) {
             ui.displayError("The index is invalid.");
+        } catch (InvalidArgumentException e) {
+            ui.displayError(e.getMessage());
         }
     }
 }

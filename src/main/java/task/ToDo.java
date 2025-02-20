@@ -1,5 +1,7 @@
 package task;
 
+import exceptions.InvalidArgumentException;
+
 /**
  * Represents a simple task without a specific deadline or time.
  */
@@ -40,7 +42,7 @@ public class ToDo extends Task {
      * @param args The stored data array.
      * @return A ToDo task.
      */
-    public static ToDo loadTask(String[] args) {
+    public static ToDo loadTask(String[] args) throws InvalidArgumentException {
         ToDo todo = new ToDo(args[2]);
         if (args[1].equals("1")) {
             todo.mark();

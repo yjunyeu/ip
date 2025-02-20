@@ -2,6 +2,8 @@ package task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import exceptions.InvalidArgumentException;
 /**
  * Represents an event task with a specific start and end time.
  */
@@ -52,7 +54,7 @@ public class Event extends Task {
      * @param args The stored data array.
      * @return An Event task.
      */
-    public static Event loadTask(String[] args) {
+    public static Event loadTask(String[] args) throws InvalidArgumentException {
         String[] period = args[3].split("<>");
         Event event = new Event(args[2], period[0], period[1]);
         if (args[1].equals("1")) {

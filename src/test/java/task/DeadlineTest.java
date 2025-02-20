@@ -1,5 +1,6 @@
 package task;
 
+import exceptions.InvalidArgumentException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -9,8 +10,11 @@ public class DeadlineTest {
     void testDeadlineStringOutput() {
         Deadline deadline = new Deadline("Submit assignment", "2025-02-10 1800");
         assertEquals("[D][ ] Submit assignment (by: 10 Feb 2025 1800)", deadline.toString());
-
-        deadline.mark();
+        try {
+            deadline.mark();
+        } catch (InvalidArgumentException e) {
+            System.out.println("Test failed");
+        }
         assertEquals("[D][X] Submit assignment (by: 10 Feb 2025 1800)", deadline.toString());
     }
 
